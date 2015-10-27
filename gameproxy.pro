@@ -4,7 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    CNetGateSession.cpp \
+    CProxySession.cpp \
     CTcpSession.cpp \
     CListenSocket.cpp \
     CPool.cpp \
@@ -15,7 +15,7 @@ include(deployment.pri)
 qtcAddDeployment()
 
 HEADERS += \
-    CNetGateSession.h \
+    CProxySession.h \
     CTcpSession.h \
     gstypes.h \
     CListenSocket.h \
@@ -27,6 +27,6 @@ HEADERS += \
 
 INCLUDEPATH += ./libs/parson
 
-LIBS += ../netgate/libs/parson/parson.c \
+LIBS += ../GameProxy/libs/parson/parson.c \
         -lev
 

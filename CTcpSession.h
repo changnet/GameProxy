@@ -7,7 +7,7 @@
 #define MAX_TCP_BUFF 16*1024    /**< tcp缓冲区大小 */
 #define MIN_TCP_BUFF 1024       /**< 预留最小缓冲区大小 */
 
-class CNetGateSession;
+class CProxySession;
 
 /**
  * @brief The STcp struct
@@ -37,9 +37,9 @@ struct STcp
 class CTcpSession
 {
 public:
-    explicit CTcpSession( CNetGateSession *netgate );
+    explicit CTcpSession( CProxySession *proxy );
     void set_user_fd( int32 user_fd );
-    void set_netgate_session( CNetGateSession *netgate );
+    void set_proxy_session( CProxySession *proxy );
     void reset();
     void session_close();
 
@@ -53,7 +53,7 @@ public:
     static bool init_tcp_connection( int32 fd );
 
 private:
-    CNetGateSession *m_netgate;
+    CProxySession *m_proxy;
     struct STcp m_user_tcp;
     struct STcp m_server_tcp;
 

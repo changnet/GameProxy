@@ -4,7 +4,7 @@
 #include <ev++.h>
 #include "gstypes.h"
 
-class CNetGateSession; /* forward declaration */
+class CProxySession; /* forward declaration */
 
 /**
  * @brief The CListenSocket class
@@ -13,12 +13,12 @@ class CNetGateSession; /* forward declaration */
 class CListenSocket
 {
 public:
-    explicit CListenSocket( CNetGateSession *netgate );
+    explicit CListenSocket( CProxySession *proxy );
 
     bool start( uint32 port );
     void stop();
 private:
-    CNetGateSession *m_netgate;
+    CProxySession *m_proxy;
     int32 m_socket_fd;
     uint32 m_port;
 

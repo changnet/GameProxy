@@ -1,15 +1,15 @@
 #include "CListenSocket.h"
-#include "CNetGateSession.h"
+#include "CProxySession.h"
 #include "gssocket.h"
 
 /**
  * @brief CListenSocket::CListenSocket
- * @param netgate
+ * @param proxy
  * 初始化监听tcp类
  */
-CListenSocket::CListenSocket(CNetGateSession *netgate)
+CListenSocket::CListenSocket(CProxySession *proxy)
 {
-    m_netgate = netgate;
+    m_proxy = proxy;
 
     m_socket_fd = 0;
 }
@@ -126,5 +126,5 @@ void CListenSocket::accept_cb(ev::io &w, int32 revents)
         return;
     }
 
-    m_netgate->add_new_connection( fd,socket_address );
+    m_proxy->add_new_connection( fd,socket_address );
 }

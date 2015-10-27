@@ -1,20 +1,20 @@
-#ifndef CNETGATESESSION_H
-#define CNETGATESESSION_H
+#ifndef CGAMEPROXYSESSION_H
+#define CGAMEPROXYSESSION_H
 
 #include <map>
 #include "CTcpSession.h"
 #include "CListenSocket.h"
 
 /**
- * @brief The CNetGateSession class
+ * @brief The CProxySession class
  * 网关会话
  * 一个网关会话代表一台服务器的网关
  */
-class CNetGateSession
+class CProxySession
 {
 public:
-    explicit CNetGateSession( );
-    ~CNetGateSession();
+    explicit CProxySession( );
+    ~CProxySession();
 
     bool start();
     void set_session( const char *ser_addr,uint32 ser_port,uint32 listen_port );
@@ -32,4 +32,4 @@ private:
     friend class CTcpSession;
 };
 
-#endif // CNETGATESESSION_H
+#endif // CGAMEPROXYSESSION_H

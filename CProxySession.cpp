@@ -1,12 +1,12 @@
-#include "CNetGateSession.h"
+#include "CProxySession.h"
 #include "CPool.h"
 #include "gslog.h"
 
 /**
- * @brief CNetGateSession::CNetGateSession
+ * @brief CProxySession::CProxySession
  * 初始化一次网关会话
  */
-CNetGateSession::CNetGateSession()
+CProxySession::CProxySession()
 {
     m_listen_socket = null;
 
@@ -16,13 +16,13 @@ CNetGateSession::CNetGateSession()
 }
 
 /**
- * @brief CNetGateSession::set_session
+ * @brief CProxySession::set_session
  * @param ser_addr
  * @param ser_port
  * @param listen_port
  * 设置网关各个参数
  */
-void CNetGateSession::set_session(const char *ser_addr, uint32 ser_port,
+void CProxySession::set_session(const char *ser_addr, uint32 ser_port,
                                   uint32 listen_port)
 {
     m_listen_socket = null;
@@ -33,10 +33,10 @@ void CNetGateSession::set_session(const char *ser_addr, uint32 ser_port,
 }
 
 /**
- * @brief CNetGateSession::~CNetGateSession
+ * @brief CProxySession::~CProxySession
  * 析构函数
  */
-CNetGateSession::~CNetGateSession()
+CProxySession::~CProxySession()
 {
     if ( m_listen_socket )
     {
@@ -46,11 +46,11 @@ CNetGateSession::~CNetGateSession()
 }
 
 /**
- * @brief CNetGateSession::start
+ * @brief CProxySession::start
  * @return
  * 开启网关会话
  */
-bool CNetGateSession::start()
+bool CProxySession::start()
 {
     assert( m_ser_port > 0 );
     assert( m_listen_port > 0 );
@@ -65,12 +65,12 @@ bool CNetGateSession::start()
 }
 
 /**
- * @brief CNetGateSession::add_new_connection
+ * @brief CProxySession::add_new_connection
  * @param fd
  * @param sock_addr
  * 处理新接入用户
  */
-void CNetGateSession::add_new_connection(uint32 fd, sockaddr_in &sock_addr)
+void CProxySession::add_new_connection(uint32 fd, sockaddr_in &sock_addr)
 {
     (void)sock_addr;  /* avoid warning: unused parameter */
 
@@ -83,7 +83,7 @@ void CNetGateSession::add_new_connection(uint32 fd, sockaddr_in &sock_addr)
     else
     {
         psession->reset();    /* 重用的需要清除旧数据 */
-        psession->set_netgate_session( this );
+        psession->set_proxy_session( this );
     }
 
     psession->set_user_fd( fd );

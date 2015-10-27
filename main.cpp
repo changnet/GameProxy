@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <signal.h>
 
-#include "CNetGateSession.h"
+#include "CProxySession.h"
 #include "CSetting.h"
 #include "CBackend.h"
 #include "CPool.h"
@@ -74,7 +74,7 @@ void start_session( const char *file )
     std::cout << "start with config file [" << file << "],"<< session_count
               << " session found:" << std::endl;
 
-    CNetGateSession* p = new CNetGateSession[session_count];
+    CProxySession* p = new CProxySession[session_count];
 
     for ( int32 i = 0;i < session_count;i ++ )
     {
@@ -126,7 +126,7 @@ void write_config( const char *file )
 
 void usage()
 {
-    std::cout << "usage:netgate [command] [config]" << std::endl;
+    std::cout << "usage:gameproxy [command] [config]" << std::endl;
     std::cout << std::endl;
     std::cout << "command:" << std::endl;
     std::cout << "  -s  start session" << std::endl;
@@ -136,8 +136,8 @@ void usage()
     std::cout << "  the config file path" << std::endl;
     std::cout << std::endl;
     std::cout << "example:" << std::endl;
-    std::cout << "./netgate -c session.json" << std::endl;
-    std::cout << "./netgate -s session.json" << std::endl;
+    std::cout << "./gameproxy -c session.json" << std::endl;
+    std::cout << "./gameproxy -s session.json" << std::endl;
 }
 
 /**
@@ -188,7 +188,7 @@ void become_daemon()
  */
 void thanks()
 {
-    std::cout << "uzone netgate 1.0" << std::endl;
+    std::cout << "game proxy 1.0" << std::endl;
     std::cout << "thanks:" << std::endl;
     std::cout << "  GNU     http://www.gnu.org" << std::endl;
     std::cout << "  libev   http://software.schmorp.de/pkg/libev.html" << std::endl;

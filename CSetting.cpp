@@ -39,7 +39,7 @@ void CSetting::reset_config()
 }
 
 /**
- * @brief CSetting::get_netgate_session_count
+ * @brief CSetting::get_proxy_session_count
  * @return 开启的网关数量
  * 获取配置中网关会话数量
  */

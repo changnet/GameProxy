@@ -1,5 +1,5 @@
 #include "CTcpSession.h"
-#include "CNetGateSession.h"
+#include "CProxySession.h"
 #include "gssocket.h"
 #include "gslog.h"
 #include "CPool.h"
@@ -11,16 +11,16 @@
 
 /**
  * @brief CTcpSession::CTcpSession
- * @param netgate
+ * @param proxy
  * 网关tcp会话初始化
  */
-CTcpSession::CTcpSession(CNetGateSession *netgate)
+CTcpSession::CTcpSession(CProxySession *proxy)
 {
-    assert( netgate != null );
+    assert( proxy != null );
 
     reset();
 
-    m_netgate = netgate;
+    m_proxy = proxy;
 }
 
 /**
@@ -35,13 +35,13 @@ void CTcpSession::set_user_fd(int32 user_fd)
 }
 
 /**
- * @brief CTcpSession::set_netgate_session
- * @param netgate
+ * @brief CTcpSession::set_proxy_session
+ * @param proxy
  * 设置所属网关会话
  */
-void CTcpSession::set_netgate_session(CNetGateSession *netgate)
+void CTcpSession::set_proxy_session(CProxySession *proxy)
 {
-    m_netgate = netgate;
+    m_proxy = proxy;
 }
 
 /**
@@ -50,7 +50,7 @@ void CTcpSession::set_netgate_session(CNetGateSession *netgate)
  */
 void CTcpSession::reset()
 {
-    m_netgate = null;
+    m_proxy = null;
 
     m_user_tcp.fd = 0;
     m_user_tcp.position = 0;
@@ -457,8 +457,8 @@ void CTcpSession::connect_to_server()
 
     bzero( &server_addr, sizeof(server_addr) );
     server_addr.sin_family = AF_INET;
-    inet_aton( m_netgate->m_ser_addr, &server_addr.sin_addr );
-    server_addr.sin_port = htons( m_netgate->m_ser_port );
+    inet_aton( m_proxy->m_ser_addr, &server_addr.sin_addr );
+    server_addr.sin_port = htons( m_proxy->m_ser_port );
 
     if ( !init_tcp_connection( m_server_tcp.fd ) )
     {
